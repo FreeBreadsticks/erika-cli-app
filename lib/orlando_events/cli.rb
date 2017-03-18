@@ -10,14 +10,14 @@ class OrlandoEvents::CLI
   end
 
   def make_months
-    months_array = Scraper.scrape_dates("http://www.downtownorlando.com/future/events/")
-    Event.create_from_collection(months_array)
+    months_array = OrlandoEvents::Scraper.scrape_dates("http://www.downtownorlando.com/future/events/")
+    OrlandoEvents::Event.create_from_collection(months_array)
   end
 
   def add_attributes_to_months
-    Event.all.each do |month|
-      attributes = Scraper.scrape_event_info(event.month_url)
-      event.add_student_attributes(attributes)
+    OrlandoEvents::Event.all.each do |month|
+      attributes = OrlandoEvents::Scraper.scrape_event_info(month.month_url)
+      # event.add_student_attributes(attributes)
     end
   end
 
