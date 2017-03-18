@@ -2,15 +2,29 @@
 class OrlandoEvents::CLI
 
   def call
+    make_months
+    add_attributes_to_months
     list_dates
     menu
     goodbye
   end
 
+  def make_months
+    months_array = Scraper.scrape_dates("http://www.downtownorlando.com/future/events/")
+    Event.create_from_collection(months_array)
+  end
+
+  def add_attributes_to_months
+    Event.all.each do |month|
+      attributes = Scraper.scrape_event_info(event.month_url)
+      event.add_student_attributes(attributes)
+    end
+  end
+
   def list_dates
     puts "Downtown has so much to offer everyone, who lives, works and plays in Central Florida. Check out what's going on in and around Downtown Orlando!"
     puts "**********************************"
-    @dates = OrlandoEvents::Event.current
+    @dates = OrlandoEvents::Event.all
     @dates.each.with_index(1) do |date, i|
       puts "#{i}. #{date.name}"
     end

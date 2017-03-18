@@ -1,33 +1,29 @@
 class OrlandoEvents::Event
-  attr_accessor :name, :events, :url
+  attr_accessor :name, :events, :month_url
+
+  @@all = []
+
+  def initialize(month_hash)
+    month_hash.each do |k,v|
+      self.send "#{k}=", v
+    end
+    @@all << self
+  end
+
+  def self.create_from_collection(months_array)
+    months_array.each do |month|
+      Event.new(month)
+      # binding.pry
+    end
+  end
 
   def self.current
     #return current list of months according to website
     self.scrape_events
   end
 
-  def self.scrape_events
-    months = []
-    #got to downtownorlando find available dates
-    #extract month event details
-    #instantiate months
-    month_1 = self.new
-    month_1.name = "March 2017"
-    month_1.events = ["Event","Event","Event","Event",]
-    month_1.url = "http://www.downtownorlando.com/future/events/?2017-03"
-
-    month_2 = self.new
-    month_2.name = "April 2017"
-    month_2.events = ["Event","Event","Event","Event",]
-    month_2.url = "http://www.downtownorlando.com/future/events/?2017-04"
-
-    month_3 = self.new
-    month_3.name = "May 2017"
-    month_3.events = ["Event","Event","Event","Event",]
-    month_3.url = "http://www.downtownorlando.com/future/events/?2017-05"
-
-    [month_1, month_2, month_3]
-    months
+  def self.all
+    @@all
   end
 
 end
