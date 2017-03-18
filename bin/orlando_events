@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require './lib/orlando_events'
-
+# require './lib/orlando_events'
+require "bundler/setup"
+require "orlando_events"
 
 OrlandoEvents::CLI.new.call

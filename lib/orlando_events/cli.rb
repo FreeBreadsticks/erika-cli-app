@@ -10,10 +10,12 @@ class OrlandoEvents::CLI
   def list_dates
     puts "Downtown has so much to offer everyone, who lives, works and plays in Central Florida. Check out what's going on in and around Downtown Orlando!"
     puts "**********************************"
-    puts "1. March 2017"
-    puts "2. April 2017"
-    puts "3. May 2017"
+    @dates = OrlandoEvents::Event.current
+    @dates.each.with_index(1) do |date, i|
+      puts "#{i}. #{date.name}"
+    end
     puts "**********************************"
+
   end
 
   def menu
@@ -22,14 +24,9 @@ class OrlandoEvents::CLI
       puts "Which month's events would you like to see? Enter number associated with month:"
       puts "Enter 'list' to see months again or enter 'exit' to quit program"
       input = gets.strip
-      case input
-      when "1"
-        puts "March Events...."
-        puts ""
-      when "2"
-        puts "April Events.."
-        puts ""
-      when "list"
+      if input.to_i > 0
+        puts @dates[input.to_i-1].events
+      elsif input == "list"
         list_dates
       else
         puts ""
