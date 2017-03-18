@@ -3,6 +3,14 @@ class OrlandoEvents::Event
 
   def self.current
     #return current list of months according to website
+    self.scrape_events
+  end
+
+  def self.scrape_events
+    months = []
+    #got to downtownorlando find available dates
+    #extract month event details
+    #instantiate months
     month_1 = self.new
     month_1.name = "March 2017"
     month_1.events = ["Event","Event","Event","Event",]
@@ -19,6 +27,7 @@ class OrlandoEvents::Event
     month_3.url = "http://www.downtownorlando.com/future/events/?2017-05"
 
     [month_1, month_2, month_3]
+    months
   end
 
 end

@@ -24,7 +24,8 @@ class OrlandoEvents::CLI
       puts "Which month's events would you like to see? Enter number associated with month:"
       puts "Enter 'list' to see months again or enter 'exit' to quit program"
       input = gets.strip
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= @dates.length
+        puts "Events for #{@dates[input.to_i-1].name}:"
         puts @dates[input.to_i-1].events
       elsif input == "list"
         list_dates
