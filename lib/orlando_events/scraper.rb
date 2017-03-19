@@ -19,17 +19,16 @@ class OrlandoEvents::Scraper
 
   def self.scrape_event_info(month_page)
     doc = Nokogiri::HTML(open(month_page))
-    doc.css(".span4").each do |event|
-      date = event.css("strong").text #gets date
-
-    end
-    doc.css(".event_detail").each do |event|
-      event_title = event.css(".event_title a").text #title
-      event_location = event.css(".location").text #date
-
+    events = []
+    doc.css(".view-content .row-fluid").each do |event|
+      date = event.css("strong").text.gsub("\n    ","") #gets date
+      # event_detail[:event_title] = event.css(".event_title a").text #title
+      # event_detail[:event_location] = event.css(".location").text #date
+      event_detail = {:date => date.gsub("            ",""), :event_title => event.css(".event_title a").text, :event_location => event.css(".location").text}
+      events << event_detail
       binding.pry
     end
-
+    events
   end
 
   def self.add_event_information

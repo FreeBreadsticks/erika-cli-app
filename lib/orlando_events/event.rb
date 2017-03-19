@@ -1,5 +1,5 @@
 class OrlandoEvents::Event
-  attr_accessor :name, :events, :month_url
+  attr_accessor :name, :events, :month_url, :date, :event_title, :event_location
 
   @@all = []
 
