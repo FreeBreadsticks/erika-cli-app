@@ -4,6 +4,7 @@ class OrlandoEvents::Event
   @@all = []
 
   def initialize(month_hash)
+    @events = []
     month_hash.each do |k,v|
       self.send "#{k}=", v
     end
@@ -17,9 +18,22 @@ class OrlandoEvents::Event
     end
   end
 
-  def self.current
+  def add_event_details(events_array)
+    events_array.each do |event_hash|
+      add_event(event_hash)
+      event_hash.each do |k, v|
+        self.send "#{k}=", v
+        # binding.pry
+      end
+    end
+    self
+  end
+
+  def add_event(event)
+
     #return current list of months according to website
-    self.scrape_events
+    @events << event
+    # binding.pry
   end
 
   def self.all

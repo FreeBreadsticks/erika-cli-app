@@ -22,19 +22,12 @@ class OrlandoEvents::Scraper
     events = []
     doc.css(".view-content .row-fluid").each do |event|
       date = event.css("strong").text.gsub("\n    ","") #gets date
-      # event_detail[:event_title] = event.css(".event_title a").text #title
-      # event_detail[:event_location] = event.css(".location").text #date
       event_detail = {:date => date.gsub("            ",""), :event_title => event.css(".event_title a").text, :event_location => event.css(".location").text}
       events << event_detail
-      binding.pry
+
     end
+    # binding.pry
     events
   end
 
-  def self.add_event_information
-    self.scrape_dates.each do |k, v|
-      self.send "#{k}=", v
-    end
-    self
-  end
 end

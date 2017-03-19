@@ -16,8 +16,8 @@ class OrlandoEvents::CLI
 
   def add_attributes_to_months
     OrlandoEvents::Event.all.each do |month|
-      attributes = OrlandoEvents::Scraper.scrape_event_info(month.month_url)
-      # event.add_student_attributes(attributes)
+      events = OrlandoEvents::Scraper.scrape_event_info(month.month_url)
+      month.add_event_details(events)
     end
   end
 
@@ -40,7 +40,14 @@ class OrlandoEvents::CLI
       input = gets.strip
       if input.to_i > 0 && input.to_i <= @dates.length
         puts "Events for #{@dates[input.to_i-1].name}:"
-        puts @dates[input.to_i-1].events
+        @dates[input.to_i-1].events.each do |event_hash|
+          event_hash.each do |k, v|
+            puts "#{k}: #{v}"
+          end
+          puts "---------------------------"
+        end
+        #   puts "#{event.event_title}"
+        # puts @dates[input.to_i-1].events
       elsif input == "list"
         list_dates
       else
