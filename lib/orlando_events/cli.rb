@@ -4,7 +4,9 @@ class OrlandoEvents::CLI
   def call
     puts "Loading Events..."
     make_months
+    puts "."
     add_attributes_to_months
+    puts ".."
     list_dates
     menu
     goodbye

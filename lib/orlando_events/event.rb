@@ -25,12 +25,6 @@ class OrlandoEvents::Event
     self
   end
 
-  # def add_event(event)
-  #   #return current list of months according to website
-  #   @events << event
-  #   # binding.pry
-  # end
-
   def add_events(month_events)
     month_events.month = self if !month_events.month
     @events << month_events
