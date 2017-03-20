@@ -22,6 +22,7 @@ class OrlandoEvents::CLI
   end
 
   def list_dates
+    puts "Welcome to the Orlando Event Tracker!"
     puts "Downtown has so much to offer everyone, who lives, works and plays in Central Florida. Check out what's going on in and around Downtown Orlando!"
     puts "**********************************"
     @dates = OrlandoEvents::Event.all
@@ -40,10 +41,14 @@ class OrlandoEvents::CLI
       input = gets.strip
       if input.to_i > 0 && input.to_i <= @dates.length
         puts "Events for #{@dates[input.to_i-1].name}:"
-        @dates[input.to_i-1].events.each do |event_hash|
-          event_hash.each do |k, v|
-            puts "#{k}: #{v}"
-          end
+        puts ""
+        @dates[input.to_i-1].events.each.with_index(1) do |event, i|
+          puts "#{i}. Event: #{event.event_title}"
+          puts "    Date: #{event.date}"
+          puts "    Location: #{event.event_location}"
+          # event_hash.each do |k, v|
+          #   puts "#{k}: #{v}"
+          # end
           puts "---------------------------"
         end
         #   puts "#{event.event_title}"
