@@ -1,6 +1,5 @@
 class OrlandoEvents::Event
   attr_accessor :name, :events, :month_url
-  #:date, :event_title, :event_location
 
   @@all = []
 
@@ -22,10 +21,6 @@ class OrlandoEvents::Event
   def add_event_details(events_array)
     events_array.each do |event_hash|
       OrlandoEvents::MonthEvents.new(event_hash, self)
-      # event_hash.each do |k, v|
-      #   self.send "#{k}=", v
-      #   # binding.pry
-      # end
     end
     self
   end
