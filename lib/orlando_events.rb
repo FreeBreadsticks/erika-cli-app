@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'pry'
 require 'open-uri'
+require 'colorize'
 
 require_relative "orlando_events/version"
 require_relative './orlando_events/cli'
