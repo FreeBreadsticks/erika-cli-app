@@ -25,8 +25,14 @@ class OrlandoEvents::CLI
   end
 
   def list_dates
-    puts "Welcome to the Orlando Event Tracker!"
+    puts "***************************************************".colorize(:green)
+    puts "*                                                 *".colorize(:green)
+    puts "*      Welcome to the Orlando Event Tracker!      *".colorize(:green)
+    puts "*                                                 *".colorize(:green)
+    puts "***************************************************".colorize(:green)
+    puts ""
     puts "Downtown has so much to offer everyone, who lives, works and plays in Central Florida. Check out what's going on in and around Downtown Orlando!"
+    puts ""
     puts "**********************************".colorize(:yellow)
     @dates = OrlandoEvents::Event.all
     @dates.each.with_index(1) do |date, i|
@@ -56,14 +62,17 @@ class OrlandoEvents::CLI
       elsif input == "list"
         list_dates
       else
-        puts ""
-        puts "DOES NOT COMPUTE. Enter " + "number".colorize(:green) + " of month," + " 'list' ".colorize(:green) + "or " + "exit".colorize(:green)
-        puts ""
+        if input != "exit"
+          puts ""
+          puts "DOES NOT COMPUTE. Enter " + "number".colorize(:green) + " of month," + " 'list' ".colorize(:green) + "or " + "exit".colorize(:green)
+          puts ""
+        end
       end
     end
   end
 
   def goodbye
+    puts ""
     puts "**********************************".colorize(:yellow)
     puts "Have a nice day!"
     puts "Be sure to come back soon for more fun events!"
